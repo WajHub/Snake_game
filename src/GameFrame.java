@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class GameFrame extends JFrame {
     GameFrame(){
@@ -6,7 +7,8 @@ public class GameFrame extends JFrame {
         this.setTitle("Snake");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-        this.setLocationRelativeTo(null);
+        this.setLocation(300,50);
         this.setResizable(false);
+        this.pack();
     }
 }
