@@ -18,8 +18,9 @@ public class GamePanel extends JPanel implements ActionListener {
         startGame();
     }
 
-    void startGame(){
-
+    public void startGame(){
+    }
+    public void paintComponent(Graphics g){
 
     }
     @Override
