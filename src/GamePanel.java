@@ -8,8 +8,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
     Const_size constant_size = new Const_size();
     Apple apple = new Apple();
+    Random random = new Random();
     GamePanel(){
-        Random random = new Random();
         this.setFocusable(true);
         this.setBackground(Color.black);
         this.setPreferredSize(new Dimension(constant_size.SCREEN_WIDTH,constant_size.SCREEN_HEIGHT));
@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements ActionListener {
         for(int i=1;i*constant_size.UNIT_SIZE<constant_size.SCREEN_HEIGHT;i++){
             g.drawLine(0,i*constant_size.UNIT_SIZE,constant_size.SCREEN_WIDTH,i*constant_size.UNIT_SIZE);
         }
-
+        apple.draw(g,constant_size);
 
     }
     @Override
