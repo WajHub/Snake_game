@@ -18,7 +18,24 @@ public class Player {
     }
 
     void move(){
-
+        for(int i = bodyParts;i>0;i--){
+            x[i]=x[i-1];
+            y[i]=y[i-1];
+        }
+        switch (direction){
+            case RIGHT:
+                x[0]+=Const_size.UNIT_SIZE;
+                break;
+            case LEFT:
+                x[0]-=Const_size.UNIT_SIZE;
+                break;
+            case UP:
+                y[0]-=Const_size.UNIT_SIZE;
+                break;
+            case DOWN:
+                y[0]+=Const_size.UNIT_SIZE;
+                break;
+        }
     }
 
 }
