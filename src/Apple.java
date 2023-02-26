@@ -2,17 +2,18 @@ import java.awt.*;
 import java.util.Random;
 
 public class Apple {
-    int x_position=1;
-    int y_position=1;
+    int x_position;
+    int y_position;
     boolean exist = true;
-    void set_position(Const_size constant){
-        x_position=50;
-        y_position=50;
+    void set_position(Player player){
+        Random random = new Random();
+        x_position= random.nextInt((int)(Const_size.SCREEN_WIDTH/Const_size.UNIT_SIZE)+1);
+        y_position=random.nextInt((int)(Const_size.SCREEN_HEIGHT/Const_size.UNIT_SIZE)+1);;
     }
-    void draw(Graphics g,Const_size constant_size){
+    void draw(Graphics g){
         g.setColor(Color.RED);
-        g.fillOval(3*constant_size.UNIT_SIZE,10*constant_size.UNIT_SIZE,
-                constant_size.UNIT_SIZE, constant_size.UNIT_SIZE);
+        g.fillOval(x_position*Const_size.UNIT_SIZE,y_position*Const_size.UNIT_SIZE,
+                Const_size.UNIT_SIZE, Const_size.UNIT_SIZE);
     }
 
 }
