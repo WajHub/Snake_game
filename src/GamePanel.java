@@ -10,7 +10,6 @@ public class GamePanel extends JPanel implements ActionListener {
     Player player = new Player();
     int delay = 100;
     Timer timer = new Timer(delay, this::actionPerformed);
-    ;
 
     GamePanel() {
         this.setFocusable(true);
@@ -46,7 +45,6 @@ public class GamePanel extends JPanel implements ActionListener {
         if (player.alive) {
             player.move();
             player.eat(apple);
-            player.check_collision();
         }
         repaint();
     }

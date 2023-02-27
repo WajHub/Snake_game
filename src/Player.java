@@ -36,6 +36,7 @@ public class Player {
                 y[0] += Const_size.UNIT_SIZE;
                 break;
         }
+        check_collision();
     }
 
     void eat(Apple apple) {
@@ -46,7 +47,6 @@ public class Player {
             apple.set_position();
         }
     }
-
     void check_collision() {
         //cheking collision border
         if (x[0] < 0 || x[0] > Const_size.SCREEN_WIDTH ||
