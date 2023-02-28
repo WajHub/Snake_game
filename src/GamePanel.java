@@ -10,11 +10,13 @@ public class GamePanel extends JPanel implements ActionListener {
     Player player = new Player();
     int delay = 100;
     Timer timer = new Timer(delay, this::actionPerformed);
+    
+    boolean pause = false;
 
     GamePanel() {
         this.setFocusable(true);
         this.setBackground(Color.black);
-        this.setPreferredSize(new Dimension(Const_size.SCREEN_WIDTH, Const_size.SCREEN_HEIGHT));
+        this.setPreferredSize(new Dimension(Const_size.SCREEN_WIDTH, Const_size.SCREEN_HEIGHT+100));
         this.addKeyListener(new MyKeyAdapter());
         startGame();
     }
@@ -30,19 +32,34 @@ public class GamePanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.GRAY);
-        for (int i = 1; i * Const_size.UNIT_SIZE < Const_size.SCREEN_WIDTH; i++) {
-            g.drawLine(i * Const_size.UNIT_SIZE, 0, i * Const_size.UNIT_SIZE, Const_size.SCREEN_HEIGHT);
-        }
-        for (int i = 1; i * Const_size.UNIT_SIZE < Const_size.SCREEN_HEIGHT; i++) {
-            g.drawLine(0, i * Const_size.UNIT_SIZE, Const_size.SCREEN_WIDTH, i * Const_size.UNIT_SIZE);
-        }
+        g.drawLine(0, Const_size.SCREEN_HEIGHT , Const_size.SCREEN_WIDTH,  Const_size.SCREEN_HEIGHT);
         apple.draw(g);
         player.draw(g);
+        draw_score(g);
+        if(!player.alive) draw_game_over(g);
+        if(pause) draw_pause(g);
     }
-
+    public void draw_score(Graphics g){
+        g.setColor(Color.RED);
+        g.setFont(new Font("Ink Free",Font.BOLD,75));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString("Score: "+player.score,(Const_size.SCREEN_WIDTH-metrics.stringWidth("Score:  "))/2,Const_size.SCREEN_HEIGHT+75);
+    }
+    public void draw_game_over(Graphics g){
+        g.setColor(Color.RED);
+        g.setFont(new Font("Ink Free",Font.BOLD,100));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString("Game Over",(Const_size.SCREEN_WIDTH-metrics.stringWidth("Game Over"))/2,Const_size.SCREEN_HEIGHT/2);
+    }
+    public void draw_pause(Graphics g){
+        g.setColor(Color.RED);
+        g.setFont(new Font("Ink Free",Font.BOLD,100));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString("Pause",(Const_size.SCREEN_WIDTH-metrics.stringWidth("Pause"))/2,Const_size.SCREEN_HEIGHT/2);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (player.alive) {
+        if (player.alive && !pause) {
             player.move();
             player.eat(apple);
         }
@@ -53,17 +70,20 @@ public class GamePanel extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_DOWN:
-                    if (player.direction != Direction.UP) player.direction = Direction.DOWN;
+                    if (player.y[0] != player.y[1]-Const_size.UNIT_SIZE) player.direction = Direction.DOWN;
                     break;
                 case KeyEvent.VK_UP:
-                    if (player.direction != Direction.DOWN) player.direction = Direction.UP;
+                    if (player.y[0] != player.y[1]+Const_size.UNIT_SIZE) player.direction = Direction.UP;
                     break;
                 case KeyEvent.VK_RIGHT:
-                    if (player.direction != Direction.LEFT) player.direction = Direction.RIGHT;
+                    if (player.x[0] != player.x[1]-Const_size.UNIT_SIZE) player.direction = Direction.RIGHT;
                     break;
                 case KeyEvent.VK_LEFT:
-                    if (player.direction != Direction.RIGHT) player.direction = Direction.LEFT;
+                    if (player.x[0] != player.x[1]+Const_size.UNIT_SIZE) player.direction = Direction.LEFT;
                     break;
+                case KeyEvent.VK_P:
+                    if(pause) pause=false;
+                    else pause = true;
             }
         }
     }

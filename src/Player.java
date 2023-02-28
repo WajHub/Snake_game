@@ -1,6 +1,7 @@
 import java.awt.*;
 
 public class Player {
+    int score=0;
     int bodyParts = 2;
     int x[] = new int[(int) Const_size.SCREEN_WIDTH * Const_size.SCREEN_HEIGHT / Const_size.UNIT_SIZE];
     int y[] = new int[(int) Const_size.SCREEN_HEIGHT * Const_size.SCREEN_WIDTH / Const_size.UNIT_SIZE];
@@ -42,6 +43,7 @@ public class Player {
     void eat(Apple apple) {
         if (apple.x_position == x[0] && apple.y_position == y[0]) {
             bodyParts++;
+            score++;
             x[bodyParts] = x[bodyParts-1];
             y[bodyParts] = y[bodyParts-1];
             apple.set_position();
