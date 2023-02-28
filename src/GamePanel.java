@@ -47,13 +47,13 @@ public class GamePanel extends JPanel implements ActionListener {
     }
     public void draw_game_over(Graphics g){
         g.setColor(Color.RED);
-        g.setFont(new Font("Ink Free",Font.BOLD,100));
+        g.setFont(new Font("Ink Free",Font.BOLD,Const_size.FONT_SIZE));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString("Game Over",(Const_size.SCREEN_WIDTH-metrics.stringWidth("Game Over"))/2,Const_size.SCREEN_HEIGHT/2);
     }
     public void draw_pause(Graphics g){
         g.setColor(Color.RED);
-        g.setFont(new Font("Ink Free",Font.BOLD,100));
+        g.setFont(new Font("Ink Free",Font.BOLD,Const_size.FONT_SIZE));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString("Pause",(Const_size.SCREEN_WIDTH-metrics.stringWidth("Pause"))/2,Const_size.SCREEN_HEIGHT/2);
     }
