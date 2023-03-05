@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
 
 public class GamePanel extends JPanel implements ActionListener {
     Apple apple = new Apple();
@@ -38,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener {
         draw_score(g);
         if(!player.alive) draw_game_over(g);
         if(pause) draw_pause(g);
+        repaint();
     }
     public void draw_score(Graphics g){
         g.setColor(Color.RED);
@@ -56,6 +58,45 @@ public class GamePanel extends JPanel implements ActionListener {
         g.setFont(new Font("Ink Free",Font.BOLD,100));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString("Pause",(Const_size.SCREEN_WIDTH-metrics.stringWidth("Pause"))/2,Const_size.SCREEN_HEIGHT/2);
+    }
+    public void save_game(){
+        pause=true;
+        String save_player = "player_state.txt";
+        String save_apple = "apple_state.txt";
+        try{
+            FileOutputStream file = new FileOutputStream(save_player);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(player);
+            file = new FileOutputStream(save_apple);
+            out = new ObjectOutputStream(file);
+            out.writeObject(apple);
+            out.close();
+            file.close();
+        }
+        catch (IOException ex) {
+            System.out.println("IOException is caught");
+        }
+    }
+    public void load_game(){
+        pause=true;
+        String save_player = "player_state.txt";
+        String save_apple = "apple_state.txt";
+        try {
+            FileInputStream file = new FileInputStream(save_player);
+            ObjectInputStream in = new ObjectInputStream(file);
+            player = (Player) in.readObject();
+            file = new FileInputStream(save_apple);
+            apple = (Apple) in.readObject();
+            in.close();
+            file.close();
+        }
+        catch (IOException ex) {
+            System.out.println("IOException is caught");
+        }
+        catch (ClassNotFoundException ex) {
+            System.out.println("ClassNotFoundException" +
+                    " is caught");
+        }
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -84,6 +125,13 @@ public class GamePanel extends JPanel implements ActionListener {
                 case KeyEvent.VK_P:
                     if(pause) pause=false;
                     else pause = true;
+                    break;
+                case KeyEvent.VK_S:
+                    save_game();
+                    break;
+                case KeyEvent.VK_L:
+                    load_game();
+                    break;
             }
         }
     }

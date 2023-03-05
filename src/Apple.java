@@ -1,7 +1,8 @@
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 
-public class Apple {
+public class Apple implements Serializable {
     int x_position;
     int y_position;
     boolean exist = true;

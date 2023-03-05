@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable {
     int score=0;
     int bodyParts = 2;
     int x[] = new int[(int) Const_size.SCREEN_WIDTH * Const_size.SCREEN_HEIGHT / Const_size.UNIT_SIZE];
