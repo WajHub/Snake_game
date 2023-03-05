@@ -18,6 +18,8 @@ What things you need to install the software and how to install them:
 * Use the arrow keys to control the snake.
 * Eat the food to grow longer.
 * Don't hit the walls or the snake's own body.
+* s - save the game
+* l - load the last game
 
 ## Preview
 ![](Snake_1.png)
