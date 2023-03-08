@@ -1,5 +1,5 @@
 # Snake_game
-A classic snake game implemented in Java Swing.
+A classic snake game implemented in Java Swing. The goal of the project was to learn how to use Git.
 ## Getting started
 These instructions will get you a copy of the project up and running on your local machine 
 for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
